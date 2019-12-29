@@ -5,6 +5,7 @@ fos_rest:
     view:
         formats: { json: true, xml: false, rss: false }
         view_response_listener: true
+        empty_content: 200
     serializer:
         serialize_null: true
     format_listener:

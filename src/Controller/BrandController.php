@@ -11,9 +11,9 @@ use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\View;
 use App\Entity\Brand;
-use Doctrine\ORM\EntityNotFoundException;
 
 /**
+ * Controller de gestion eds marques.
  * @Route("/api/brands")
  */
 class BrandController extends FOSRestController
@@ -62,7 +62,7 @@ class BrandController extends FOSRestController
     /**
      * Supprime une marque en base.
      * @param $brandId L'id de la marque à supprimer.
-     * @throws EntityNotFoundException
+     * @throws EntityNotFoundException Si l'id passé en paramètre ne correspond à aucune des entités présentes en base.
      * 
      * @Delete("/{brandId}")
      * @View
@@ -76,14 +76,15 @@ class BrandController extends FOSRestController
      * Met à jour une marque en base (uniquement la propriété "name").
      * @param $brandId L'id de la marque à mettre à jour.
      * @param $brandDTO Un objet {@link App\Entity\Brand} contenant toutes les nouvelles valeurs de l'objet (au minimum la propriété "name").
+     * @throws EntityNotFoundException Si l'id passé en paramètre ne correspond à aucune des entités présentes en base.
      * @return La marque mise à jour.
      * 
      * @Put("/{brandId}")
      * @View
-     * @ParamConverter("brand", class="App\Entity\Brand", converter="fos_rest.request_body")
+     * @ParamConverter("brandDTO", class="App\Entity\Brand", converter="fos_rest.request_body")
      */
-    public function updateBrandAction(int $brandId, Brand $brand): Brand
+    public function updateBrandAction(int $brandId, Brand $brandDTO): Brand
     {
-        return $this->brandService->updateBrand($brandId, $brand);
+        return $this->brandService->updateBrand($brandId, $brandDTO);
     }
 }
