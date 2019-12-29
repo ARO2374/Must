@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Service\CategoryService;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -16,7 +16,7 @@ use App\Entity\Category;
  * Controller de gestion des catégories.
  * @Route("/api/categories")
  */
-class CategoryController extends FOSRestController
+class CategoryController extends AbstractFOSRestController
 {
 	/**
      * @var $categoryService

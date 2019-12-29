@@ -33,6 +33,15 @@ class BrandService
     }
 
     /**
+     * Retourne une marque en base.
+     * @return Une marque ({@link App\Entity\Brand}).
+     */
+    public function getBrand($id): Brand
+    {
+        return $this->brandRepository->find($id);
+    }
+
+    /**
      * Ajoute une marque en base.
      * @param $brand La marque à ajouter.
      * @return Un objet {@link App\Entity\Brand}.

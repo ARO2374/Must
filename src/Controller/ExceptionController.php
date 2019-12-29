@@ -2,13 +2,13 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 /**
  * Controller permettant de gérer les exceptions renvoyées par le reste de l'appli.
  */
-class ExceptionController extends FOSRestController
+class ExceptionController extends AbstractFOSRestController
 {
     public function showAction(Request $request, $exception, DebugLoggerInterface $logger = null)
     {

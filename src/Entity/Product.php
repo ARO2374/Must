@@ -45,7 +45,7 @@ class Product
     private $brand;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProductsCategories", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="ProductsCategories", mappedBy="product", cascade={"persist", "remove"})
      */
     private $productsCategories;
 
@@ -111,7 +111,7 @@ class Product
         return $this->brand;
     }
 
-    public function setBrand(string $brand): self
+    public function setBrand(Brand $brand): self
     {
         $this->brand = $brand;
 

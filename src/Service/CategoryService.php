@@ -33,6 +33,15 @@ class CategoryService
     }
 
     /**
+     * Retourne la catégorie en base.
+     * @return Une catégorie ({@link App\Entity\Category}).
+     */
+    public function getCategory($id): Category
+    {
+        return $this->categoryRepository->find($id);
+    }
+
+    /**
      * Ajoute une catégorie en base.
      * @param $category La catégorie à ajouter.
      * @return Un objet {@link App\Entity\Category}.

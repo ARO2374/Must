@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Service\BrandService;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -13,10 +13,10 @@ use FOS\RestBundle\Controller\Annotations\View;
 use App\Entity\Brand;
 
 /**
- * Controller de gestion eds marques.
+ * Controller de gestion des marques.
  * @Route("/api/brands")
  */
-class BrandController extends FOSRestController
+class BrandController extends AbstractFOSRestController
 {
 	/**
      * @var $brandService
