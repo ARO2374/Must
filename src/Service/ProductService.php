@@ -72,6 +72,7 @@ class ProductService
         if (!$product) {
             throw new EntityNotFoundException($productId);
         }
+        
         $this->productRepository->delete($product);
     }
 

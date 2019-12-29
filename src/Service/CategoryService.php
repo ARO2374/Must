@@ -62,6 +62,7 @@ class CategoryService
         if (!$category) {
             throw new EntityNotFoundException($categoryId);
         }
+
         $this->categoryRepository->delete($category);
     }
 
@@ -78,7 +79,7 @@ class CategoryService
         if (!$categoryBD) {
             throw new EntityNotFoundException($categoryId);
         }
-        
+
         $categoryBD->setName($categoryDTO->getName());
 
         return $this->categoryRepository->save($categoryBD);

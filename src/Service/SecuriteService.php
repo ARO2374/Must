@@ -11,10 +11,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecuriteService
 {
     /**
-     * @var $userRepository
+     * @var $userRepository Repository de gestion des utilisateurs.
      */
     private $userRepository;
 
+    /**
+     * @var $passwordEncoder Service de gestion des mots de passe.
+     */
     private $passwordEncoder;
 
     /**
@@ -31,22 +34,19 @@ class SecuriteService
      * @param $email L'email de l'utilisateur.
      * @param $password Le mot de passe de l'utilisateur.
      */
-    public function gererToken(string $email, string $password): string
+    public function genererToken(string $email, string $password): string
     {
         // Récupération de l'utilisateur par l'email
         $user = $this->userRepository->findOneByEmail($email);
         if (!$user) {
-            // throw Exception ('Email invalide !')
-            $this->supprimerToken($email);
-            return 'Email invalide !';
+            throw new \Exception('Email invalide !', 404);
         }
 
         // Vérification du mot de passe
         $credentialsvalid = $this->passwordEncoder->isPasswordValid($user, $password);
         if (!$credentialsvalid) {
-            // throw Exception ('Mot de passe invalide !')
+            throw new \Exception('Mot de passe invalide !', 403);
             $this->supprimerToken($email);
-            return 'Mot de passe invalide !';
         }
 
         // Génération d'un token unique

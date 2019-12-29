@@ -10,10 +10,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\View;
-use JMS\Serializer\Annotation\PostDeserialize;
 use App\Entity\Product;
-use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializerInterface;
 
 /**
  * Controller de gestion des produits.
@@ -70,7 +67,7 @@ class ProductController extends AbstractFOSRestController
      * @View
      * @ParamConverter("product", class="App\Entity\Product", converter="fos_rest.request_body")
      */
-    public function createProductAction(Request $request, Product $product): Product
+    public function createProductAction(Product $product): Product
     {
         return $this->productService->addProduct($product);
     }

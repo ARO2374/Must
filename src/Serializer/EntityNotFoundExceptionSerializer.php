@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Handler;
+namespace App\Serializer;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigator;
@@ -8,7 +8,7 @@ use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonSerializationVisitor;
 use Doctrine\ORM\EntityNotFoundException;
 
-class EntityNotFoundExceptionHandler implements SubscribingHandlerInterface
+class EntityNotFoundExceptionSerializer implements SubscribingHandlerInterface
 {
     /**
      * @return array

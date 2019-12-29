@@ -62,6 +62,7 @@ class BrandService
         if (!$brand) {
             throw new EntityNotFoundException($brandId);
         }
+
         $this->brandRepository->delete($brand);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Handler;
+namespace App\Serializer;
 
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\GraphNavigator;
@@ -18,15 +18,28 @@ use App\Service\ProductsCategoriesService;
 /**
  * Serializer des produits.
  */
-class ProductHandler implements SubscribingHandlerInterface
+class ProductSerializer implements SubscribingHandlerInterface
 {
+    /**
+     * @var $brandRepository Le service de gestion des marques.
+     */
     private $brandService;
+
+    /**
+     * @var $categoryService Le service de gestion des catégories.
+     */
     private $categoryService;
+
+    /**
+     * @var $productsCategoriesService Le service de gestion des ProductsCategories.
+     */
     private $productsCategoriesService;
 
     /**
      * Constructeur de l'ApiController.
-     * @param ProductService $productService
+     * @param BrandService $brandService Le service de gestion des marques.
+     * @param CategoryService $categoryService Le service de gestion des catégories.
+     * @param ProductsCategoriesService $productsCategoriesService Le service de gestion des ProductsCategories.
      */
     public function __construct(BrandService $brandService, CategoryService $categoryService, ProductsCategoriesService $productsCategoriesService)
     {
@@ -56,6 +69,15 @@ class ProductHandler implements SubscribingHandlerInterface
         ];
     }
 
+    /**
+     * Méthode permettant de convertir un objet Product en json
+     * @param JsonSerializationVisitor $visitor
+     * @param Product                  $product
+     * @param array                    $type
+     * @param Context                  $context
+     *
+     * @return array
+     */
     public function serialize(JsonSerializationVisitor $visitor, Product $product, array $type, Context $context)
     {
         $data = [
@@ -76,7 +98,16 @@ class ProductHandler implements SubscribingHandlerInterface
         return $visitor->visitArray($data, $type, $context);
     }
 
-    public function deserialize(JsonDeserializationVisitor $visitor, $productDTO, array $type, Context $context)
+    /**
+     * Méthode permettant de construire un objet Product à partir d'un json.
+     * @param JsonDeserializationVisitor $visitor
+     * @param array                      $productDTO
+     * @param array                      $type
+     * @param Context                    $context
+     *
+     * @return Product
+     */
+    public function deserialize(JsonDeserializationVisitor $visitor, array $productDTO, array $type, Context $context)
     {
         $product = new Product();
         if (array_key_exists('name', $productDTO)) {
